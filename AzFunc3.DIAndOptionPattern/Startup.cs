@@ -1,11 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Http;
-using Microsoft.Extensions.Logging;
 using SendGrid;
 
 [assembly: FunctionsStartup(typeof(AzFunc3.DIAndOptionPattern.Startup))]
@@ -26,23 +22,27 @@ namespace AzFunc3.DIAndOptionPattern
 
 
       //reference https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection
-      builder.Services
+
+      //This used for adding a singleton instance of custom properties that you will have insides "Values"
+      //please note I have tries using EmailConfiguration outside of "Values" but wasn't successful. If you know how to do that kindly share
+      builder
+        .Services
         .AddOptions<EmailConfiguration>()
-              .Configure<IConfiguration>((settings, configuration) =>
+        .Configure<IConfiguration>((settings, configuration) =>
                                   {
-                                    configuration.Bind("EmailConfiguration", settings);
+                                    configuration.Bind(EmailConfiguration.CustomPropertiesNames, settings);
                                   });
 
-      builder.Services
+      //This is custom properties outside of "Values", 
+      builder
+        .Services
         .AddOptions<ConnectionStrings>()
-              .Configure<IConfiguration>((settings, configuration) =>
-              {
-                configuration.Bind("ConnectionStrings", settings);
-              });
+        .Configure<IConfiguration>((settings, configuration) =>
+        {
+          configuration.Bind("ConnectionStrings", settings);
+        });
 
-      //builder.Services
-      //       .AddOptions<EmailConfiguration>()
-      //.Configure<IConfiguration>((settings, configuration) => { configuration.Bind("EmailConfiguration", settings); });
+
     }
   }
 }

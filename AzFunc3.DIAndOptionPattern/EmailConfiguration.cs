@@ -1,16 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
+﻿
 namespace AzFunc3.DIAndOptionPattern
 {
+  /// <summary>
+  /// This class matches any custom properties that you will have application setting once deployed 
+  /// or in local.settings.json:Values when debugging
+  /// </summary>
   public class EmailConfiguration
   {
-    //This property must match the key from the local.setting.json or the Azurefunction once deployed
-    //Having this as contant here allows us to not worry about using configuration.GetSection()
-    // public const string SettingName = "EmailConfiguration";
+    public const string CustomPropertiesNames = "EmailConfiguration";
+
+    /// <summary>
+    /// From Email address
+    /// EmailConfiguration:FromMail
+    /// </summary>
     public string FromMail { get; set; }
+
+    /// <summary>
+    /// TO Email Address
+    /// EmailConfiguration:ToEmail
+    /// </summary>
     public string ToEmail { get; set; }
   }
 }
