@@ -2,23 +2,27 @@
 
 This is simple start project to start your new Azure Serverless Project using Dependency Injection and Options pattern.
 
- 1. I created this project becasue I was no open to go back and find how I did DI and Options in my last project 
+ 1. I created this project because I was not open to go back every single time and find how I implemented DI and Options in my last project 
     
- 2. I was tired of keeping track of Environment.getPropertyname()
+ 2. But mostly because I am lazy and dislike to repeat myself and keep track of millions (joking) Environment.getPropertyname()
  
+
  ## Use Case
-1. The use case for Dependency Injection is fairly obvious you need to insert different client based on your workflow.
+1. The use case for Dependency Injection must be fairly obvious: you need to insert different client based on your workflow.
 2. The use case for IOption is best practice. If you are like me I don't want to change code in multiple place and would go
 any length (while practical) to find a way to reduce the duplication and increase maintenance and extensibility.
 
 IOption Using IOptions<ClassName> 
+ 
 ![IOption Using IOptions<ClassName>](https://github.com/sameerjain01/AzFunc3.DIAndOptionPattern/blob/master/IOptionONRuntime.png)
 
 IOption Using Values 
+
 ![IOption Using Values](https://github.com/sameerjain01/AzFunc3.DIAndOptionPattern/blob/master/IoptionMethod2.PNG)
 
 
 ## Code
+
 ### Startup.cs Setting Up Dependecy Injection
 
 ```
@@ -35,7 +39,9 @@ namespace AzFunc3.DIAndOptionPattern
    }
   }
   ```
+  
 ### Startup.cs Configuring Services
+
 ```
  //Adding instamce of HTTP Client as singleton
       builder.Services.AddHttpClient();
@@ -71,6 +77,7 @@ namespace AzFunc3.DIAndOptionPattern
 ```
 
 ## Plain Old CLR Object (POCO) for IOptions
+
  *EmailConfiguration*
 
 ```
@@ -104,7 +111,8 @@ public class ConnectionStrings
 ```
 
 ## Gotcha
-The Ioption only works if you are using your custom class inside "Values" or Using the ConnectionStrings 
+
+The IOption only works if you are using your custom class inside "Values" or Using the ConnectionStrings 
 which is standard Appsetting when you deploy to Azure. This is not unusual at all but can trip you
 if you are not thinking how final solution will be deployed.
 
@@ -122,7 +130,9 @@ if you are not thinking how final solution will be deployed.
 }
 ```
 
+
  ## Dependencies
+ 
  1. Microsoft.Azure.Functions.Extensions 1.0.0
  2. Microsoft.Azure.WebJobs.Extensions.SendGrid 3.0.0
  3. Microsoft.Extensions.Http 3.1.4
@@ -130,11 +140,17 @@ if you are not thinking how final solution will be deployed.
 
 Built using Azure Function with C# in Visual Studio 2019
 
+
 ## Author
+
 * Sameer
 
+
 ## Licence
+
 Under MIT Licence. Please feel free to use and extend.
 
+
 ## Acknowledgement
+
 Microsoft Doc
